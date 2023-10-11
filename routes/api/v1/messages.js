@@ -23,6 +23,15 @@ router.put("/", (req, res) => {
     });
 });
 
+router.delete("/", (req, res) => {
+    let id = req.query.id;
+
+    res.json({
+        status: "success",
+        message: `DELETE message with id ${id}`,
+    });
+});
+
 router.get("/", (req, res) => {
     const username = req.query.user;
     const id = req.query.id;
