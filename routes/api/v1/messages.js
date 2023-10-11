@@ -13,6 +13,16 @@ router.post("/", (req, res) => {
     });
 });
 
+router.put("/", (req, res) => {
+    const id = req.query.id;
+    const message = req.body.message;
+
+    res.json({
+        status: "success",
+        message: `PUT ${message} with id ${id}`,
+    });
+});
+
 router.get("/", (req, res) => {
     const username = req.query.user;
     const id = req.query.id;
