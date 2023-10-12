@@ -42,17 +42,21 @@ router.get("/", (req, res) => {
             status: "success",
             message: `GET messages with username ${username}`,
         });
-    } else if (id) {
-        res.json({
-            status: "success",
-            message: `GET messages with id ${id}`,
-        });
     } else {
         res.json({
             status: "success",
             message: "GET all messages",
         });
     }
+});
+
+router.get("/:id", (req, res) => {
+    const id = req.params.id;
+
+    res.json({
+        status: "success",
+        message: `GET message with id ${id}`,
+    });
 });
 
 module.exports = router;
