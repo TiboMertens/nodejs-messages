@@ -14,8 +14,8 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put("/", (req, res) => {
-    const id = req.query.id;
+router.put("/:id", (req, res) => {
+    const id = req.params.id;
     const message = req.body.message;
 
     res.json({
