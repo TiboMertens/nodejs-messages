@@ -5,12 +5,11 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  let message = req.body.message;
-  let user = req.body.user;
+  let user = req.body.message.user;
 
   res.json({
     status: "success",
-    message: `POST ${message} for user ${user}`,
+    message: `POSTING a new message for user ${user}`,
   });
 });
 
