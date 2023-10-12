@@ -20,7 +20,7 @@ router.put("/:id", (req, res) => {
 
   res.json({
     status: "success",
-    message: `PUT ${message} with id ${id}`,
+    message: `UPDATE message with id ${id}`,
   });
 });
 
