@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const cors = require('cors'); // Import the cors middleware
 
 //require routes
 const messages = require('./routes/api/v1/messages');
@@ -10,6 +11,7 @@ const logger = require('./middleware/logger');
 
 //json body parser
 app.use(express.json());
+app.use(cors()); // Use the cors middleware
 app.use("/api/v1/messages", messages);
 
 app.listen(port, () => {
