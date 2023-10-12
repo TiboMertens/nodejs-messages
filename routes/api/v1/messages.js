@@ -23,8 +23,8 @@ router.put("/", (req, res) => {
     });
 });
 
-router.delete("/", (req, res) => {
-    let id = req.query.id;
+router.delete("/:id", (req, res) => {
+    let id = req.params.id;
 
     res.json({
         status: "success",
