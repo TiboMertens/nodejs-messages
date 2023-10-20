@@ -35,14 +35,23 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   const id = req.params.id;
-  const message = req.body.message;
 
-  res.json({
-    status: "success",
-    message: `UPDATE message with id ${id}`,
-  });
+  try {
+    const message = await Message.find({ id: id });
+
+    res.json({
+      status: "success",
+      message: `UPDATE message with id ${id}`,
+    });
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Error updating the message" });
+  }
 });
 
 router.delete("/:id", async (req, res) => {
