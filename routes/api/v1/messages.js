@@ -45,9 +45,22 @@ router.put("/:id", (req, res) => {
   });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   let id = req.params.id;
 
+  try {
+    const message = await Message.find({ id: id });
+    res.json({
+      status: "success",
+      message: `DELETE message with id ${id}`,
+    });
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Error deleting the message" });
+  }
   res.json({
     status: "success",
     message: `DELETE message with id ${id}`,
