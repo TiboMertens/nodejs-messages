@@ -82,13 +82,22 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = req.params.id;
 
-  res.json({
-    status: "success",
-    message: `GET message with id ${id}`,
-  });
+  try {
+    const message = await Message.find({ id: id });
+    res.json({
+      status: "success",
+      message: `GET message with id ${id}`,
+    });
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Error getting messages" });
+  }
 });
 
 module.exports = router;
