@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const cors = require('cors'); // Import the cors middleware
+// require config directory
+const config = require('config');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labo4');
+mongoose.connect(config.get('Database.conn'));
 
 //require routes
 const messages = require('./routes/api/v1/messages');
