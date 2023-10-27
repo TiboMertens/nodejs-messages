@@ -5,7 +5,7 @@ const cors = require('cors'); // Import the cors middleware
 // require config directory
 const config = require('config');
 const mongoose = require('mongoose');
-mongoose.connect(config.get('Database.conn'));
+mongoose.connect(process.env.MONGOD);
 
 //require routes
 const messages = require('./routes/api/v1/messages');
