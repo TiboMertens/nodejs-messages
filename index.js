@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+require('dotenv').config()
 const cors = require('cors'); // Import the cors middleware
 // require config directory
 const config = require('config');
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGOD);
+mongoose.connect(process.env.MONGODBPASSWORD);
 
 //require routes
 const messages = require('./routes/api/v1/messages');
