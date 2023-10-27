@@ -6,18 +6,7 @@ const cors = require('cors'); // Import the cors middleware
 // require config directory
 const config = require('config');
 const mongoose = require('mongoose');
-const connectDatabase = async () => {
-  try {    
-    await mongoose.connect(process.env.MONGODBPASSWORD);
-
-    console.log("connected to database");
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
-
-connectDatabase();
+mongoose.connect(process.env.MONGODBPASSWORD);
 
 //require routes
 const messages = require('./routes/api/v1/messages');
