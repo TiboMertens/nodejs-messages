@@ -12,6 +12,32 @@ const Message = mongoose.model("Message", messageSchema);
 //create router
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  try {
+    // Find all messages with username in the url, otherwise return all messages
+    const username = req.query.user;
+    if (username) {
+      const messages = await Message.find({ user: username });
+      res.json({
+        status: "success",
+        message: `GET all messages with username ${username}`,
+        data: messages,
+      });
+    } else {
+      const messages = await Message.find();
+      res.json({
+        status: "success",
+        message: "GET all messages",
+        data: messages,
+      });
+    }
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res.status(500).json({ status: "error", message: `Error getting messages ${err.message}`, error: err.message });
+  }
+});
+
 router.post("/", async (req, res) => {
   // Create a new instance of the Message model
   const message = new Message();
@@ -74,34 +100,6 @@ router.delete("/:id", async (req, res) => {
     status: "success",
     message: `DELETE message with id ${id}`,
   });
-});
-
-router.get("/", async (req, res) => {
-  try {
-    // Find all messages with username in the url, otherwise return all messages
-    const username = req.query.user;
-    if (username) {
-      const messages = await Message.find({ user: username });
-      res.json({
-        status: "success",
-        message: `GET all messages with username ${username}`,
-        data: messages,
-      });
-    } else {
-      const messages = await Message.find();
-      res.json({
-        status: "success",
-        message: "GET all messages",
-        data: messages,
-      });
-    }
-  } catch (err) {
-    // Handle any errors
-    console.error(err);
-    res
-      .status(500)
-      .json({ status: "error", message: "Error getting messages" });
-  }
 });
 
 router.get("/:id", async (req, res) => {
