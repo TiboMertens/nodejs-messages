@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
         data: messages,
       });
     } else {
-      const messages = await Message.find();
+      const messages = await Message.find({});
       res.json({
         status: "success",
         message: "GET all messages",
